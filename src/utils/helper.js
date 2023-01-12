@@ -42,5 +42,5 @@ const getCreatedAtDateTimeSQL = async () => {
 };
 
 export {
-	customResp, logger
+	customResp, logger, getCreatedAtDateTimeSQL
 };

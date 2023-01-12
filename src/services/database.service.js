@@ -1,6 +1,7 @@
+import dotenv from "dotenv";
+dotenv.config();
 import mysql from "mysql";
-import util from "util";
-import { logger } from "../utils/helper";
+import { logger } from "../utils/helper.js";
 
 const mysqlHost = process.env.MYSQL_HOST || "";
 const mysqlUser = process.env.MYSQL_USERNAME || "";
@@ -13,7 +14,10 @@ const database = mysql.createPool({
 	user: mysqlUser,
 	password: mysqlPassword,
 	database: mysqlDatabase,
+	socketPath : '/Applications/MAMP/tmp/mysql/mysql.sock', //path to mysql sock in MAMP
 });
+
+console.log("mysqlHost: ", mysqlHost)
 
 database.getConnection((err , connection) => {
 	if (err) {
@@ -35,7 +39,5 @@ database.getConnection((err , connection) => {
 
 	return;
 });
-
-// database.query = util.promisify(database.query);
 
 export default database;
