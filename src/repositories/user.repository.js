@@ -2,6 +2,7 @@ import { getCreatedAtDateTimeSQL, logger } from "../utils/helper.js";
 import database from "../services/database.service.js";
 import bcrypt from "bcrypt"
 import lodash from "lodash";
+import jwt from "jsonwebtoken"
 
 const tableName = "users"
 const createUser = async (username, email, password) => {
@@ -70,6 +71,16 @@ const loginUserByEmailPassword = async (email, password) => {
                             if (userData["password"]) {
                                 delete userData["password"]
                             }
+
+                            // Sign Token
+                            const token = jwt.sign({
+                                data: userData
+                            }, 'secret', { expiresIn: '1h' });
+
+                            if (token) {
+                                userData["access_token"] = token
+                            }
+
                             resolve(userData);
                         } else {
                             reject('INCORRECT_PASSWORD')
