@@ -14,11 +14,11 @@ export const create = async (req, res) => {
 			return customResp(res, 400, `DUPLICATE_EMAIL`, {});
 		} else {
 			await userRepository.createUser(username, email, password)
-			const dataObject = {
-				username: username,
-				email: email
-			};
-			return customResp(res, 200, `SUCCESS`, dataObject);
+			// const dataObject = {
+			// 	username: username,
+			// 	email: email
+			// };
+			return customResp(res, 200, `SUCCESS`);
 		}
 	} catch (e) {
 		return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
@@ -28,13 +28,18 @@ export const create = async (req, res) => {
 export const login = async (req, res) => {
 	try {
 		logger("info", "===== User Login =====");
-		const dataObject = {
-
-		};
-		return customResp(res, 200, `SUCCESS`, dataObject);
-
+		const {email, password } = req.body;
+		const result = await userRepository.loginUserByEmailPassword(email, password)
+		return customResp(res, 200, `SUCCESS`, result);
 	} catch (e) {
-		return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+		if (e == "INCORRECT_PASSWORD") {
+			return customResp(res, 401, e, e.message);
+		} else if (e == "USER_WAS_NOT_FOUND") {
+			return customResp(res, 404, e, e.message);
+		} else {
+			return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+		}
+		
 	}
 };
 

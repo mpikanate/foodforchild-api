@@ -4,8 +4,8 @@ import moment from "moment-timezone";
 
 const customResp = (res, statusCode = 200, message = "", data = null, other = null) => {
 	let returnData = {
-		statusCode,
-		message
+		status_code: statusCode,
+		message: message
 	};
 	if (data) {
 		returnData.data = data;

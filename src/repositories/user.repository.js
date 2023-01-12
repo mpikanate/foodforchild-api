@@ -1,6 +1,7 @@
 import { getCreatedAtDateTimeSQL, logger } from "../utils/helper.js";
 import database from "../services/database.service.js";
 import bcrypt from "bcrypt"
+import lodash from "lodash";
 
 const tableName = "users"
 const createUser = async (username, email, password) => {
@@ -15,7 +16,8 @@ const createUser = async (username, email, password) => {
         const saltRounds = 10;
         bcrypt.hash(password, saltRounds, async (err, hash) => {
             if (err) {
-                throw err;
+                logger("error", err);
+                reject(err)
             }
 
             // Store hash in your password DB.
@@ -46,7 +48,44 @@ const findUserByEmail = async (email) => {
     }));
 };
 
+const loginUserByEmailPassword = async (email, password) => {
+    // query to database
+    const query = `SELECT * FROM ${tableName} WHERE email = ?`;
+    return await new Promise((resolve, reject) => database.query(query, [email], (err, rows) => {
+        if (err) {
+            logger("error", err);
+            reject(err)
+        } else {
+            if (lodash.size(rows) > 0) {
+                const userData = rows[0]
+                const hashPassword = userData["password"]
+
+                bcrypt.compare(password, hashPassword, (err, result) => {
+                    if (err) {
+                        logger("error", err);
+                        reject(err)
+                    } else {
+                        if (result) {
+                            // Delete password to do not show in response
+                            if (userData["password"]) {
+                                delete userData["password"]
+                            }
+                            resolve(userData);
+                        } else {
+                            reject('INCORRECT_PASSWORD')
+                        }
+                    }
+                });
+            } else {
+                reject('USER_WAS_NOT_FOUND')
+            }
+
+        }
+    }));
+};
+
 export default {
     findUserByEmail,
+    loginUserByEmailPassword,
     createUser
 };
