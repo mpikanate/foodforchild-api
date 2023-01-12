@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "npm-run-all",
+    "dev-build": "nodemon --watch --exec npm-run-all build start",
+    "dev": "nodemon ./src/app.js --watch",
+    "start": "node .",
+    "test": "jest --coverage"
+  },
+  "author": {
+    "name": "Pichayut Makwan"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http": "0.0.1-security",
+    "lodash": "^4.17.21",
+    "log4js": "^6.7.1",
+    "moment-timezone": "^0.5.40",
+    "mysql2": "^2.3.3"
+  }
+}
