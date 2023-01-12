@@ -12,7 +12,7 @@ router.post(
 router.post(
     "/login",
     // verifyToken,
-    User.create
+    User.login
 );
 
 export default router;

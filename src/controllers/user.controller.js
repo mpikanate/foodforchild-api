@@ -18,7 +18,7 @@ export const create = async (req, res) => {
 
 export const login = async (req, res) => {
 	try {
-		logger("info", "===== User Create =====");
+		logger("info", "===== User Login =====");
 		const dataObject = {
 			
 		};
@@ -30,5 +30,6 @@ export const login = async (req, res) => {
 };
 
 export default {
-	create
+	create, 
+	login
 };
