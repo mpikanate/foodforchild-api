@@ -44,8 +44,23 @@ const findFoodById = async (id) => {
     }));
 };
 
+const findByAgeGroup = async (ageGroup, limit = 3) => {
+    // query to database
+    const query = `SELECT * FROM ${tableName} WHERE Age_Group = ${ageGroup} ORDER BY RAND() LIMIT ${limit}`;
+    return await new Promise((resolve, reject) => database.query(query, [ageGroup,limit], (err, rows) => {
+        if (err) {
+            logger("error", err);
+            reject(err)
+        } else {
+            logger("info", "findByAgeGroup rows : " + rows);
+            resolve(rows);
+        }
+    }));
+};
+
 export default {
     findAllFood,
     findFoodByName,
-    findFoodById
+    findFoodById,
+    findByAgeGroup
 };

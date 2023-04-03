@@ -18,4 +18,9 @@ router.post(
     Food.findById
 );
 
+router.post(
+    "/find-by-age-group",
+    Food.findByAgeGroup
+);
+
 export default router;
