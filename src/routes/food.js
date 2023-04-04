@@ -29,6 +29,11 @@ router.post(
 );
 
 router.post(
+    "/find-by-age-group-and-name",
+    Food.findByAgeGroupAndName
+);
+
+router.post(
     "/find-favorite",
     Food.findFavorite
 );

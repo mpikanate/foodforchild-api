@@ -64,6 +64,18 @@ const findByAgeGroup = async (req, res) => {
     }
 };
 
+const findByAgeGroupAndName = async (req, res) => {
+    try {
+        logger("info", "===== Food findByAgeGroupAndName =====");
+        const { age_group, name } = req.body;
+        const result = await foodRepository.findByAgeGroupAndName(age_group, name)
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
 
 const findFavorite = async (req, res) => {
     try {
@@ -109,5 +121,6 @@ export default {
     findByAgeGroup,
     findFavorite,
     favorite,
-    unfavorite
+    unfavorite,
+    findByAgeGroupAndName
 };

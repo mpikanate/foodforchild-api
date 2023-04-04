@@ -31,6 +31,20 @@ const findFoodByName = async (name) => {
     }));
 };
 
+const findByAgeGroupAndName = async (ageGroup, name) => {
+    // query to database
+    const query = `SELECT * FROM ${tableName} WHERE name like '%${name}%' and Age_Group = ${ageGroup}`;
+    return await new Promise((resolve, reject) => database.query(query, [ageGroup, name], (err, rows) => {
+        if (err) {
+            logger("error", err);
+            reject(err)
+        } else {
+            logger("info", "findByAgeGroupAndName rows : " + rows);
+            resolve(rows);
+        }
+    }));
+};
+
 const findFoodById = async (id) => {
     // query to database
     const query = `SELECT * FROM ${tableName} WHERE FoodID = ? LIMIT 1`;
@@ -119,6 +133,7 @@ export default {
     findFoodById,
     findFoodByIds,
     findByAgeGroup,
+    findByAgeGroupAndName,
     findFavoriteFood,
     favoriteFood,
     unfavoriteFood
