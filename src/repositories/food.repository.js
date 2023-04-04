@@ -18,7 +18,7 @@ const findAllFood = async () => {
 
 const findFoodByName = async (name) => {
     // query to database
-    const query = `SELECT * FROM ${tableName} WHERE name like '%${name}%' LIMIT 1`;
+    const query = `SELECT * FROM ${tableName} WHERE name like '%${name}%'`;
     return await new Promise((resolve, reject) => database.query(query, (err, rows) => {
         if (err) {
             logger("error", err);
