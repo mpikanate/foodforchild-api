@@ -40,6 +40,18 @@ const findById = async (req, res) => {
     }
 };
 
+const findByIds = async (req, res) => {
+    try {
+        logger("info", "===== Food findByIds =====");
+        const { food_ids } = req.body;
+        const result = await foodRepository.findFoodByIds(food_ids)
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
 const findByAgeGroup = async (req, res) => {
     try {
         logger("info", "===== Food findByAgeGroup =====");
@@ -56,5 +68,6 @@ export default {
     findAll,
     findByName,
     findById,
+    findByIds,
     findByAgeGroup
 };

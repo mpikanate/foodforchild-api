@@ -19,6 +19,11 @@ router.post(
 );
 
 router.post(
+    "/find-by-ids",
+    Food.findByIds
+);
+
+router.post(
     "/find-by-age-group",
     Food.findByAgeGroup
 );

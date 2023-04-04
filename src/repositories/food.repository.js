@@ -44,6 +44,20 @@ const findFoodById = async (id) => {
     }));
 };
 
+const findFoodByIds = async (ids) => {
+    // query to database
+    const query = `SELECT * FROM ${tableName} WHERE FoodID in (?)`;
+    return await new Promise((resolve, reject) => database.query(query, [ids], (err, rows) => {
+        if (err) {
+            logger("error", err);
+            reject(err)
+        } else {
+            logger("info", "findFoodByIds rows : " + rows);
+            resolve(rows);
+        }
+    }));
+};
+
 const findByAgeGroup = async (ageGroup, limit = 3) => {
     // query to database
     const query = `SELECT * FROM ${tableName} WHERE Age_Group = ${ageGroup} ORDER BY RAND() LIMIT ${limit}`;
@@ -62,5 +76,6 @@ export default {
     findAllFood,
     findFoodByName,
     findFoodById,
+    findFoodByIds,
     findByAgeGroup
 };
