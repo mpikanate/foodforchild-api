@@ -64,10 +64,50 @@ const findByAgeGroup = async (req, res) => {
     }
 };
 
+
+const findFavorite = async (req, res) => {
+    try {
+        logger("info", "===== Food findById =====");
+        const { food_id, user_id } = req.body;
+        const result = await foodRepository.findFavoriteFood(food_id, user_id)
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
+const favorite = async (req, res) => {
+    try {
+        logger("info", "=====favorite =====");
+        const { food_id, user_id } = req.body;
+        const result = await foodRepository.favoriteFood(food_id, user_id);
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
+const unfavorite = async (req, res) => {
+    try {
+        logger("info", "=====favorite =====");
+        const { food_id, user_id } = req.body;
+        const result = await foodRepository.unfavoriteFood(food_id, user_id);
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
 export default {
     findAll,
     findByName,
     findById,
     findByIds,
-    findByAgeGroup
+    findByAgeGroup,
+    findFavorite,
+    favorite,
+    unfavorite
 };

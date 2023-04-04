@@ -28,7 +28,7 @@ const createUser = async (username, email, password) => {
                     logger("error", err);
                     reject(err)
                 }
-                logger("info", "Row inserted with id = " + rows.insertId);
+                logger("info", "Row inserted with id = " + rows["insertId"]);
                 resolve(rows);
             });
         });

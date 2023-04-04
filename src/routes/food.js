@@ -28,4 +28,19 @@ router.post(
     Food.findByAgeGroup
 );
 
+router.post(
+    "/find-favorite",
+    Food.findFavorite
+);
+
+router.post(
+    "/favorite",
+    Food.favorite
+);
+
+router.post(
+    "/unfavorite",
+    Food.unfavorite
+);
+
 export default router;

@@ -38,7 +38,7 @@ const createKid = async (data) => {
             logger("error", err);
             reject(err)
         }
-        logger("info", "Row inserted with id = " + rows.insertId);
+        logger("info", "Row inserted with id = " + rows["insertId"]);
         resolve(rows);
     }));
 };
@@ -51,7 +51,7 @@ const updateKid = async (data) => {
             logger("error", err);
             reject(err)
         }
-        logger("info", "Row inserted with id = " + rows.insertId);
+        logger("info", "Row inserted with id = " + rows["insertId"]);
         resolve(rows);
     }));
 };
