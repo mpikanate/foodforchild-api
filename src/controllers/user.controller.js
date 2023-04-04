@@ -13,12 +13,12 @@ export const create = async (req, res) => {
 		if (lodash.size(userData) > 0) {
 			return customResp(res, 400, `DUPLICATE_EMAIL`, {});
 		} else {
-			await userRepository.createUser(username, email, password)
+			const result = await userRepository.createUser(username, email, password)
 			// const dataObject = {
 			// 	username: username,
 			// 	email: email
 			// };
-			return customResp(res, 200, `SUCCESS`);
+			return customResp(res, 200, `SUCCESS`, result);
 		}
 	} catch (e) {
 		return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
@@ -28,7 +28,7 @@ export const create = async (req, res) => {
 export const login = async (req, res) => {
 	try {
 		logger("info", "===== User Login =====");
-		const {email, password } = req.body;
+		const { email, password } = req.body;
 		const result = await userRepository.loginUserByEmailPassword(email, password)
 		return customResp(res, 200, `SUCCESS`, result);
 	} catch (e) {
@@ -39,7 +39,7 @@ export const login = async (req, res) => {
 		} else {
 			return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
 		}
-		
+
 	}
 };
 

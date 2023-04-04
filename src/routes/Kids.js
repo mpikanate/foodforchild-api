@@ -4,10 +4,24 @@ import Kids from "../controllers/Kids-controller.js";
 import { verifyToken } from "../middlewares/authorization.js";
 
 router.post(
-    "/find-all",
+  "/find-all",
   Kids.findAllKids
 );
 
+router.post(
+  "/find-by-id",
+  Kids.findById
+);
+
+router.post(
+  "/create",
+  Kids.create
+);
+
+router.post(
+  "/update",
+  Kids.update
+);
 
 
 export default router;
