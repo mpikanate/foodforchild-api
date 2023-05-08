@@ -15,7 +15,7 @@ const database = mysql.createPool({
 	user: mysqlUser,
 	password: mysqlPassword,
 	database: mysqlDatabase,
-	socketPath: process.env.INSTANCE_UNIX_SOCKET,
+	// socketPath: process.env.INSTANCE_UNIX_SOCKET,
 });
 
 console.log("mysqlHost: ", mysqlHost)
