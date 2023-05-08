@@ -7,7 +7,7 @@ import * as Route from "./services/routing.service.js";
 import cors from "cors"
 
 const host = process.env.SERVER_HOST;
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || "8080";
 
 const app = express();
 app.use(express.json());
