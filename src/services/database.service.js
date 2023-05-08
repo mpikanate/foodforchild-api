@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
-// import mysql from "mysql";
-import mysql from "promise-mysql";
+import mysql from "mysql";
+// import mysql from "promise-mysql";
 import { logger } from "../utils/helper.js";
 
 const mysqlHost = process.env.MYSQL_HOST || "";
