@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
-import mysql from "mysql";
+// import mysql from "mysql";
+import mysql from "promise-mysql";
 import { logger } from "../utils/helper.js";
 
 const mysqlHost = process.env.MYSQL_HOST || "";
@@ -14,7 +15,7 @@ const database = mysql.createPool({
 	user: mysqlUser,
 	password: mysqlPassword,
 	database: mysqlDatabase,
-	// socketPath : '/Applications/MAMP/tmp/mysql/mysql.sock', //path to mysql sock in MAMP
+	socketPath: process.env.INSTANCE_UNIX_SOCKET,
 });
 
 console.log("mysqlHost: ", mysqlHost)
