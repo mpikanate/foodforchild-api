@@ -14,7 +14,7 @@ const database = mysql.createPool({
 	user: mysqlUser,
 	password: mysqlPassword,
 	database: mysqlDatabase,
-	socketPath : '/Applications/MAMP/tmp/mysql/mysql.sock', //path to mysql sock in MAMP
+	// socketPath : '/Applications/MAMP/tmp/mysql/mysql.sock', //path to mysql sock in MAMP
 });
 
 console.log("mysqlHost: ", mysqlHost)
