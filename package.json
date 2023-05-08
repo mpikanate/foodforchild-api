@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "build": "npm-run-all",
+    "build": "npm-run-all build start",
     "dev-build": "nodemon --watch --exec npm-run-all build start",
     "dev": "nodemon ./src/app.js --watch",
     "start": "node .",
