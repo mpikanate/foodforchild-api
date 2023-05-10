@@ -50,11 +50,22 @@ const update = async (req, res) => {
     }
 };
 
+const findByUserId = async (req, res) => {
+    try {
+        logger("info", "=====findByUserId =====");
+        const { user_id } = req.body;
+        const result = await KidsRepository.findKidByUserId(user_id);
+        return customResp(res, 200, `SUCCESS`, result);
 
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
 
 export default {
 	findAllKids,
 	findById,
     create,
-    update
+    update,
+    findByUserId
 };

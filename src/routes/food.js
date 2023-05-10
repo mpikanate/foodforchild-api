@@ -29,6 +29,11 @@ router.post(
 );
 
 router.post(
+    "/find-by-age-group-random",
+    Food.findByAgeGroupRandom
+);
+
+router.post(
     "/find-by-age-group-and-name",
     Food.findByAgeGroupAndName
 );
@@ -46,6 +51,11 @@ router.post(
 router.post(
     "/unfavorite",
     Food.unfavorite
+);
+
+router.post(
+    "/find-favorite-user",
+    Food.findFavoriteByUser
 );
 
 export default router;

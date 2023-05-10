@@ -56,10 +56,24 @@ const updateKid = async (data) => {
     }));
 };
 
+const findKidByUserId = async (user_id) => {
+    // query to database
+    const query = `SELECT * FROM ${tableName} WHERE UserId = ?`;
+    return await new Promise((resolve, reject) => database.query(query, [user_id], (err, rows) => {
+        if (err) {
+            logger("error", err);
+            reject(err)
+        } else {
+            logger("info", "findKidByUserId rows : " + rows);
+            resolve(rows);
+        }
+    }));
+};
 
 export default {
     findAllKids,
     findKidById,
     createKid,
-    updateKid
+    updateKid,
+    findKidByUserId
 };

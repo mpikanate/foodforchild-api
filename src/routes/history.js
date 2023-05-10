@@ -8,6 +8,9 @@ router.post(
   History.findAllHistory
 );
 
-
+router.post(
+  "/create",
+History.create
+);
 
 export default router;

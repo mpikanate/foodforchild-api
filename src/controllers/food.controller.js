@@ -64,6 +64,18 @@ const findByAgeGroup = async (req, res) => {
     }
 };
 
+const findByAgeGroupRandom = async (req, res) => {
+    try {
+        logger("info", "===== Food findByAgeGroupRandom =====");
+        const { age_group, limit } = req.body;
+        const result = await foodRepository.findByAgeGroupRandom(age_group, limit)
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
 const findByAgeGroupAndName = async (req, res) => {
     try {
         logger("info", "===== Food findByAgeGroupAndName =====");
@@ -82,6 +94,18 @@ const findFavorite = async (req, res) => {
         logger("info", "===== Food findById =====");
         const { food_id, user_id } = req.body;
         const result = await foodRepository.findFavoriteFood(food_id, user_id)
+        return customResp(res, 200, `SUCCESS`, result);
+
+    } catch (e) {
+        return customResp(res, 500, `SOMETHING_WENT_WRONG`, e.message);
+    }
+};
+
+const findFavoriteByUser = async (req, res) => {
+    try {
+        logger("info", "===== Food findById =====");
+        const { age_group, user_id } = req.body;
+        const result = await foodRepository.findFavoriteFoodByUser(age_group, user_id)
         return customResp(res, 200, `SUCCESS`, result);
 
     } catch (e) {
@@ -119,8 +143,10 @@ export default {
     findById,
     findByIds,
     findByAgeGroup,
+    findByAgeGroupRandom,
     findFavorite,
     favorite,
     unfavorite,
-    findByAgeGroupAndName
+    findByAgeGroupAndName,
+    findFavoriteByUser
 };

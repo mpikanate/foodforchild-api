@@ -23,5 +23,10 @@ router.post(
   Kids.update
 );
 
+router.post(
+  "/find-by-user-id",
+  Kids.findByUserId
+);
+
 
 export default router;
