@@ -29,7 +29,23 @@ const CalculateWeight = async (years, months, gender, weight) => {
     }));
 };
 
+
+const RecommendFood = async (type) => {
+    // query to database
+    const query = `SELECT * FROM Foods_Under_Over where type = ? ORDER BY RAND() LIMIT 1`;
+    return await new Promise((resolve, reject) => database.query(query, [type], (err, rows) => {
+        if (err) {
+            logger("error", err);
+            reject(err)
+        } else {
+            logger("info", "RecommendFood rows : " + rows);
+            resolve(rows);
+        }
+    }));
+};
+
 export default {
     CalculateHeight,
-    CalculateWeight
+    CalculateWeight,
+    RecommendFood
 };

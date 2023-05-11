@@ -9,9 +9,14 @@ router.post(
 );
 
 router.post(
-    "/calculate-weight",
-    Calculate.CalculateWeight
-  );
+  "/calculate-weight",
+  Calculate.CalculateWeight
+);
+
+router.post(
+  "/recommend-food",
+  Calculate.RecommendFood
+);
 
 
 export default router;
